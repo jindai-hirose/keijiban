@@ -1,0 +1,37 @@
+<!-- http://localhost/keijiban/mypage.php -->
+
+<!DOCTYPE html>
+<html lang="ja">
+
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="http://localhost/keijiban/css/home.css">
+    <title>掲示板-管理者ログイン</title>
+  </head>
+
+  <body>
+    <head>
+      <h1>掲示板</h1>
+      <nav>
+        <ul>
+          <li><a href="http://localhost/keijiban/home.html" id="ホーム">ホーム</a></li>
+          <li><a href="http://localhost/keijiban/table.php" id="一覧">一覧・検索</a></li>
+          <li><a href="http://localhost/keijiban/creating.php" id="作成">掲示板作成</a></li>
+          <li><a href="http://localhost/keijiban/user_login.html" id="ログインページ">ログイン</a></li>
+        </ul>
+      </nav>
+    </head>
+    <main>
+      <h2>会員ログイン</h2>
+      <!-- エラーメッセージ表示 -->
+      <section>
+        <form action="http://localhost/keijiban/user_login.php" method="post">
+          <p>会員IDを入力：<input type="text" name="user" required></p>
+          <p>パスワードを入力：<input type="password" name="password" required></p>
+          <p><input type="submit" value="ログイン"></p>
+          </form>
+      </section>
+      <p>会員登録がまだの方は<a href="http://localhost/keijiban/user_add.html" id="新規会員登録">コチラ</a>。</p>
+    </main>
+  </body>
+</html>
