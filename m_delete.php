@@ -1,8 +1,8 @@
-<!--
-  スレッドをデータベースから削除
--->
 
 <?php
+
+
+
 ini_set('display_errors', "On");
 
 	// データベースの接続情報
@@ -29,11 +29,14 @@ ini_set('display_errors', "On");
 
 
   $delete_sqli = new mysqli('localhost', 'root', 'root', 'board');
+  var_dump($_POST);
+
 
   if(empty($_POST)) {
     echo "<a href='http://localhost/keijiban/admin_threadtable.php'>スレッド一覧</a>←こちらのページからどうぞ";
     //exit();
   }else{
+    //var_dump($_POST);exit;
     if(isset($_POST['submit_delete2'])){
       $delete = $delete_sqli -> prepare("DELETE FROM messages WHERE id = $id");
       if($delete){
@@ -42,7 +45,5 @@ ini_set('display_errors', "On");
     }
   }
   $delete_sqli->close();
-  
-  header('Location: http://localhost/keijiban/admin.php');
 
 ?>  

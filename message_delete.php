@@ -99,7 +99,7 @@
 
     <form　method="POST" id="<?php print_r($id);?>"　name="meassage_delete"　action="<?php print_r($url);?>">
       <!--<input type="button" name="delete_cancel" onclick="window.history.back();" value="キャンセル">-->
-      <button class="button" name="submit_delete2">削除</button>
+      <button class="button" name="submit_delete2" onclick="deleteMessage(<?php print_r($id);?>,'<?php print_r($url);?>')">削除</button>
     </form>
     <hr>
 
@@ -107,16 +107,43 @@
 
     <script language="javascript" type="text/javascript">
 
+      function deleteMessage(messageId,url) {
+        console.log(messageId,url)
+          if(!window.confirm('本当に削除してよろしいですか？')) {
+            return;
+          }
+          
+          let fd = new FormData();
 
-      function OnButtonClick2(){
-        const message_delete = document.getElementsByName('message_delete');
-        if(window.confirm('本当に削除してよろしいですか？')){
-          document.message_delete.submit();
-          return ture;
-        }else{
-          return false;
-        }
-      };
+          fd.append("submit_delete2",messageId);
+
+          fetch(url, {
+            method : "post",
+            body: fd
+          }).then((res) => {
+            if(res.status !== 200) {
+              throw new Error("system error.");
+            }
+            return res.text();
+          }).then((text) => {
+            console.log(text);
+          }).catch((e) => {
+            console.log(e.message);
+          }).finally(() => {
+            location.reload();
+          });
+              
+     }
+
+      // function OnButtonClick2(){
+      //   const message_delete = document.getElementsByName('message_delete');
+      //   if(window.confirm('本当に削除してよろしいですか？')){
+      //     document.message_delete.submit();
+      //     return ture;
+      //   }else{
+      //     return false;
+      //   }
+      // };
 
 
       /*document.querySelector('.button').addEventListener('click',() => {
