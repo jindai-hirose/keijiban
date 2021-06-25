@@ -112,7 +112,7 @@
           if(!window.confirm('本当に削除してよろしいですか？')) {
             return;
           }
-          
+
           let fd = new FormData();
 
           fd.append("submit_delete2",messageId);
@@ -125,15 +125,15 @@
               throw new Error("system error.");
             }
             return res.text();
-          }).then((text) => {
-            console.log(text);
-          }).catch((e) => {
-            console.log(e.message);
-          }).finally(() => {
-            location.reload();
-          });
-              
-     }
+            }).then((text) => {
+              console.log(text);
+            }).catch((e) => {
+              console.log(e.message);
+            }).finally(() => {
+              location.reload();
+            });
+                
+          }
 
       // function OnButtonClick2(){
       //   const message_delete = document.getElementsByName('message_delete');

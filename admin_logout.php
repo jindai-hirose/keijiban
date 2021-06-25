@@ -51,7 +51,7 @@
         <li><a href="http://localhost/keijiban/home.html" id="ホーム">ホーム</a></li>
         <li><a href="http://localhost/keijiban/table.php" id="一覧">一覧・検索</a></li>
         <li><a href="http://localhost/keijiban/creating.php" id="作成">掲示板作成</a></li>
-        <li><a href="http://localhost/keijiban/admin_login.php" id="管理者ページ">管理者ログイン</a></li>
+        <li><a href="http://localhost/keijiban/user_login.html" id="管理者ページ">管理者ログイン</a></li>
       </ul>
     </nav>
   </head>

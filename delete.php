@@ -35,8 +35,10 @@ ini_set('display_errors', "On");
   }else{
     if(isset($_POST['submit_delete1'])){
       $delete = $delete_sqli -> prepare("DELETE FROM threads WHERE th_id = $th_id");
+      $delete2 = $delete_sqli -> prepare("DELETE FROM messages WHERE th_id = $th_id");
       if($delete){
         $delete -> execute();
+        $delete2 -> execute();
       } 
     }
   }

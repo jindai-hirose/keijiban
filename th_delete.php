@@ -64,34 +64,55 @@
   <p class="text-confirm">以下の投稿を削除します。<br>よろしければ「削除」ボタンを押してください。</p>
   <?php if( !empty($message_array) ): ?>
     <?php foreach( $message_array as $value ): ?>
-    <hr>
-    <article>
-      <div class="info">
-        <h3>題名：<?php echo $value['th_name']; ?></h3>
-        <p>作成日：<time><?php echo date('Y年m月d日 H:i', strtotime($value['th_date'])); ?></time></p>
-        <p>概要：<?php echo $value['th_outline']; ?></p>
-      </div>
-    </article>
-    <hr>
-    <?php $url ="http://localhost/keijiban/delete.php?th_id=".$th_id; ?>
+      <hr>
+      <article>
+        <div class="info">
+          <h3>題名：<?php echo $value['th_name']; ?></h3>
+          <p>作成日：<time><?php echo date('Y年m月d日 H:i', strtotime($value['th_date'])); ?></time></p>
+          <p>概要：<?php echo $value['th_outline']; ?></p>
+        </div>
+      </article>
+      <hr>
+      <?php $url ="http://localhost/keijiban/delete.php?id=".$id."&th_id=".$th_id; ?>
 
-    <form method="POST" name="th_delete" action="<?php print_r($url) ?>">
-      <input type="button" name="delete_cancel" onclick="window.history.back();" value="キャンセル">
-      <input type="submit" name="submit_delete1" value="削除" onclick="OnButtonClick1();return false;">　
-    </form>
+      <form method="POST" name="th_delete" action="<?php print_r($url) ?>">
+        <input type="button" name="delete_cancel" onclick="window.history.back();" value="キャンセル">
+        <input type="submit" name="submit_delete1" value="削除" onclick="deleteMessage(<?php print_r($th_id);?>,'<?php print_r($url);?>')">　
+      </form>
+    <?php endforeach ?>
 
-  <?php endforeach ?>
+    <script language="javascript" type="text/javascript">
 
-  <script language="javascript" type="text/javascript">
-      function OnButtonClick1(){
-        const th_delete = document.getElementsByName('th_delete');
-        if(window.confirm('本当に削除してよろしいですか？')){
-          document.th_delete.submit();
-          return ture;
-        }else{
-          return false;
+      function deleteMessage(threadId,url) {
+        console.log(threadId,url)
+        if(!window.confirm('本当に削除してよろしいですか？')) {
+          return;
         }
-      };
+        
+        let fd = new FormData();
+
+        fd.append("submit_delete1",messageId);
+
+        fetch(url, {
+          method : "post",
+          body: fd
+        })
+        .then((res) => {
+          if(res.status !== 200) {
+            throw new Error("system error.");
+          }
+          return res.text();
+          })
+          .then((text) => {
+            console.log(text);
+          })
+          .catch((e) => {
+            console.log(e.message);
+          })
+          .finally(() => {
+            location.reload();
+          });
+        }
     </script>
 
   <?php endif ?>
