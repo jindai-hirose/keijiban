@@ -63,6 +63,22 @@ ini_set('display_errors', "On");
 		$sqlmy->close();
 	}
 
+	$sqlid = new mysqli('localhost', 'root', 'root', 'board');
+
+	// 接続エラーの確認
+	if( $sqlid->connect_errno ) {
+		$error_message[] = 'データの読み込みが失敗しました。 エラー番号 '.$sqlmy->connect_errno.' : '.$sqlmy->connect_error;
+	} else {
+		// データを取得する処理
+		$id = "SELECT id FROM messages WHERE th_id = $th_id";
+		$res_id = $sqlid->query($id);
+		
+    if( $id ) {
+      $message_array3 = $res_id->fetch_all(MYSQLI_ASSOC);
+    }
+		$sqlid->close();
+	}
+
 
 ?>
 
@@ -119,10 +135,12 @@ ini_set('display_errors', "On");
 		</section>
 
     <?php $url = "http://localhost/keijiban/th_delete.php?th_id=".$th_id; ?>
-    <a href="<?php print_r($url);?>">スレッド削除</a></p>
-    <?php $url2 = "http://localhost/keijiban/message_delete.php?th_id=".$th_id; ?>
-    <a href="<?php print_r($url2);?>">投稿削除</a></p>
-		
+    <a href="<?php print_r($url);?>"><input type="button" value="スレッド削除"></a></p>
+		<?php if( !empty($message_array3) ): ?>
+			<?php $url2 = "http://localhost/keijiban/message_delete.php?th_id=".$th_id; ?>
+			<a href="<?php print_r($url2);?>"><input type="button" value="投稿削除"></a></p>
+		<?php endif; ?>
+
     <?php if( !empty($message_array) ): ?>
 		<?php foreach( $message_array as $value ): ?>
 			<hr>

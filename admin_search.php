@@ -130,7 +130,7 @@ ini_set('display_errors', "On");
             <p>作成日：<?php echo date('Y年m月d日 H:i', strtotime($value['th_date'])); ?></p>
             <p>概要：<?php echo $value['th_outline']; ?></p>
             <?php $url2 = "http://localhost/keijiban/th_delete.php?th_id=".$value["th_id"]; ?>
-            <a href="<?php print_r($url2);?>"><p>スレッド削除</p></a>
+            <a href="<?php print_r($url2);?>"><input type="button" value="スレッド削除"></a></p>
           </div>
         </article>
       </a>
