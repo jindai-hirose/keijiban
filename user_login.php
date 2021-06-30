@@ -1,15 +1,14 @@
 <?php
-  if(isset($_POST['user'])) {
+  if(isset($_POST['user'],$_POST['password'])) {
     $dsn='mysql:dbname=board;charset=utf8';
-    $user='ユーザー名';
-    $password='パスワード';
+    $user=$_POST['user'];
+    $password=$_POST['password'];
     $dbh = new PDO($dsn,$user,$password);
 
-    $stmt = $dbh->prepare("SELECT * FROM users WHERE user_id=:user");
-    $stmt->bindParam(':user', $_POST['user']);
+    $stmt = $dbh->prepare("SELECT * FROM users WHERE user_id = $user");
     $stmt->execute();
     if($rows = $stmt->fetch()) {
-      if($rows["password"] ==  $_POST['password']) {
+      if($stmt ===  $_POST['password']) {
         print "<p>ログイン成功</p>";
       }else {
         print "<p>ログイン失敗</p>";
