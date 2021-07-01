@@ -1,44 +1,65 @@
 <?php
 
+  include("./column.php");
+
   ini_set('display_errors', "On");
+
+  function dd(...$value){
+    var_dump(...$value); exit;
+  }
+
+//dd($usersId);
+  
 
   $name = $_POST['name'];
   $mail = $_POST['mail'];
   $username = $_POST['username'];
   $pass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
 
-  $dsn = "mysql:host=localhost; dbname=users; charset=utf8";
+  $dsn = "mysql:host=localhost; dbname=board; charset=utf8";
   $dbUsername = "root";
   $dbPassword = "root";
   try {
       $dbh = new PDO($dsn, $dbUsername, $dbPassword);
   } catch (PDOException $e) {
+    //var_dump($e->getMessage()); exit;
       $msg = $e->getMessage();
   }
 
   //重複チェック
-  $overlapCheck = "SELECT * FROM users WHERE mail = $mail";
+  $overlapCheck = "SELECT * FROM users WHERE $usersMail = :mail";
   $stmt = $dbh->prepare($overlapCheck);
   $stmt->bindValue(':mail', $mail);
   $stmt->execute();
+  
+  /** @var array|false $member */
   $member = $stmt->fetch();
-  if ($member['mail'] === $mail) {
-    $msg = '同じメールアドレスが存在します。';
-    $link = '<a href="http://localhost/keijiban/user_login.html">戻る</a>';
-  } else {
-    //登録されていなければinsert 
-    $registration = "INSERT INTO users(name, mail, pass) VALUES (:name, :mail, :pass)";
-    $stmt = $dbh->prepare($registration);
-    $stmt->bindValue(':name', $name);
-    $stmt->bindValue(':mail', $mail);
-    $stmt->bindValue(':pass', $pass);
-    $stmt->execute();
-    $msg = '会員登録が完了しました';
-    $link = '<a href="login.php">ログインページ</a>';
+
+  //登録されていなければinsert
+  if (!$member){
+    try{
+      $registration = "INSERT INTO users ($usersName, $usersMail, $usersPass) VALUES (:name, :mail, :pass)";
+      $stmt = $dbh->prepare($registration);
+      $stmt->bindValue(':name', $name);
+      $stmt->bindValue(':mail', $mail);
+      $stmt->bindValue(':pass', $pass);
+      $stmt->execute();
+      //dd($stmt);
+      $msg = '会員登録が完了しました';
+      $link = '<a href="http://localhost/keijiban/user_login.html">ログインページ</a>';
+      echo $msg. $link;
+      return;
+    }catch(Exception $e){
+      dd($e->getMessage());
+    }
   }
 
-
-  
+  if ($member[$usersMail] === $mail) {
+    //dd($member);
+    $msg = '登録済みのメールアドレスです。';
+    $link = '<a href="http://localhost/keijiban/user_login.html">戻る</a>';
+  }
+  echo $msg. $link;
 
   // if(isset($_POST['user'])) {
   //   $dsn='mysql:dbname=board;charset=utf8';
