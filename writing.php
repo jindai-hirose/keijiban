@@ -91,6 +91,7 @@ ini_set('display_errors', "On");
     $mysqli->close(); 
 
     //リダイレクト　
+      
 
     include('./table.php');
     
