@@ -1,4 +1,4 @@
-<!-- http://localhost/keijiban/creating.php -->
+<!-- http://localhost:8000/creating.php -->
 
 <!--
   スレッド作成、スレッド一覧へのリンク
@@ -12,7 +12,7 @@ ini_set('display_errors', "On");
 
 <head>
   <meta charset="utf-8">
-	<link rel="stylesheet" href="http://localhost/keijiban/css/home.css">
+	<link rel="stylesheet" href="./css/home.css">
   <title>掲示板-掲示板作成</title>
 </head>
 
@@ -22,16 +22,16 @@ ini_set('display_errors', "On");
     <h1>掲示板</h1>
     <nav>
       <ul>
-			  <li><a href="http://localhost/keijiban/home.html" id="ホーム">ホーム</a></li>
-        <li><a href="http://localhost/keijiban/table.php" id="一覧">一覧・検索</a></li>
-        <li><a href="http://localhost/keijiban/creating.php" id="作成">掲示板作成</a></li>
-        <li><a href="http://localhost/keijiban/user_login.html" id="ログインページ">ログイン</a></li>
+			  <li><a href="./home.html" id="ホーム">ホーム</a></li>
+        <li><a href="./table.php" id="一覧">一覧・検索</a></li>
+        <li><a href="./creating.php" id="作成">掲示板作成</a></li>
+        <li><a href="./user_login.html" id="ログインページ">ログイン</a></li>
       </ul>
     </nav>
   </head>
 
   <main>
-    <a href="http://localhost/keijiban/creating.php"><h2>掲示板作成</h2></a>
+    <a href="./creating.php"><h2>掲示板作成</h2></a>
     
     <!-- エラーメッセージ表示 -->
     <?php if( !empty($error_message) ): ?>
@@ -50,7 +50,7 @@ ini_set('display_errors', "On");
       </ul>
     <?php endif; ?>
 
-    <form action="http://localhost/keijiban/writing.php" method="post" name="submission1">
+    <form action="./writing.php" method="post" name="submission1">
 			<div>
 				<label for="th_name">題名</label>
 				<input type="text" id="th_name" name="th_name" value="スレッドテスト">
@@ -73,13 +73,13 @@ ini_set('display_errors', "On");
       }
     </script>
 
-		<a href="http://localhost/keijiban/table.php"><h2>掲示板一覧・検索</h2></a>
+		<a href="./table.php"><h2>掲示板一覧・検索</h2></a>
 
     <?php if( !empty($message_array) ): ?>
       <?php foreach( $message_array as $value ): ?>
       <hr>
 
-          <?php $url = "http://localhost/keijiban/threadtable.php?th_id=".$value["th_id"]; ?>
+          <?php $url = "./threadtable.php?th_id=".$value["th_id"]; ?>
           <?php print_r($url);?>
 
         <a href="<?php print_r($url);?>" id="スレッド">

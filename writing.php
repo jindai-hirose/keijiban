@@ -30,25 +30,25 @@ ini_set('display_errors', "On");
 
 
   //sqlインジェクション対策
-	if($_GET["th_id"] == null){
-		print_r($_GET["th_id"]);
-		//die();
-		header('Location: http://localhost/keijiban/error.php');
-	}
-
-	if(strval($th_id) != strval(intval($th_id))){
-		//die();
-		header('Location: http://localhost/keijiban/error.php');
-	}
-
-	$idcheck = "SELECT MAX(th_id) FROM threads";
-	if($_GET["th_id"]>$idcheck){
-		//die();
-		header('Location: http://localhost/keijiban/error.php');
-	}
+//	if($_GET["th_id"] == null){
+//		print_r($_GET["th_id"]);
+//		//die();
+//		header('Location: ./error.php');
+//	}
+//
+//	if(strval($th_id) != strval(intval($th_id))){
+//		//die();
+//		header('Location: ./error.php');
+//	}
+//
+//	$idcheck = "SELECT MAX(th_id) FROM threads";
+//	if($_GET["th_id"]>$idcheck){
+//		//die();
+//		header('Location: ./error.php');
+//	}
 
   // データベースに接続（書き込み）
-  $mysqli = new mysqli('localhost', 'root', 'root', 'board');
+  $mysqli = new mysqli('127.0.0.1', 'root', 'root', 'board');
   
   // 接続エラーの確認
   if( $mysqli->connect_errno ) {
@@ -92,7 +92,7 @@ ini_set('display_errors', "On");
 
     //リダイレクト　
 
-    header('Location: http://localhost/keijiban/table.php');
+    include('./table.php');
     
     }
 

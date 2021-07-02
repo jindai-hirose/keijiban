@@ -1,4 +1,4 @@
-<!-- http://localhost/keijiban/table.php -->
+<!-- http://localhost:8000/table.php -->
 
 <!--
   スレッド一覧
@@ -28,24 +28,24 @@
 	$clean = array();
 
   // データベースに接続（読み込み）
-include("dbConnection.php");
+//include("dbConnection.php");
 
-//	$mysqli = new mysqli('localhost', 'root', 'root', 'board');
-//
-//	// 接続エラーの確認
-//	if( $mysqli->connect_errno ) {
-//		$error_message[] = 'データの読み込みが失敗しました。 エラー番号 '.$mysqli->connect_errno.' : '.$mysqli->connect_error;
-//	} else {
-//		// データを取得する処理
-//		$sql = "SELECT th_id,th_name,th_outline,th_date FROM threads ORDER BY th_date DESC";
-//		$res = $mysqli->query($sql);
-//
-//		if( $res ) {
-//			$message_array = $res->fetch_all(MYSQLI_ASSOC);
-//		}
-//
-//		$mysqli->close();
-//	}
+	$mysqli = new mysqli('127.0.0.1', 'root', 'root', 'board');
+
+	// 接続エラーの確認
+	if( $mysqli->connect_errno ) {
+		$error_message[] = 'データの読み込みが失敗しました。 エラー番号 '.$mysqli->connect_errno.' : '.$mysqli->connect_error;
+	} else {
+		// データを取得する処理
+		$sql = "SELECT th_id,th_name,th_outline,th_date FROM threads ORDER BY th_date DESC";
+		$res = $mysqli->query($sql);
+
+		if( $res ) {
+			$message_array = $res->fetch_all(MYSQLI_ASSOC);
+		}
+
+		$mysqli->close();
+	}
 
 ?>
 
@@ -54,7 +54,7 @@ include("dbConnection.php");
 
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="http://localhost/keijiban/css/home.css">
+  <link rel="stylesheet" href="./css/home.css">
   <title>掲示板-一覧・検索</title>
 </head>
 
@@ -63,18 +63,18 @@ include("dbConnection.php");
     <h1>掲示板</h1>
     <nav>
       <ul>
-        <li><a href="http://localhost/keijiban/home.html" id="ホーム">ホーム</a></li>
-        <li><a href="http://localhost/keijiban/table.php" id="一覧">一覧・検索</a></li>
-        <li><a href="http://localhost/keijiban/creating.php" id="作成">掲示板作成</a></li>
-        <li><a href="http://localhost/keijiban/user_login.html" id="ログインページ">ログイン</a></li>
+        <li><a href="./home.html" id="ホーム">ホーム</a></li>
+        <li><a href="./table.php" id="一覧">一覧・検索</a></li>
+        <li><a href="./creating.php" id="作成">掲示板作成</a></li>
+        <li><a href="./user_login.html" id="ログインページ">ログイン</a></li>
       </ul>
     </nav>
   </head>
 
   <main>
-    <a href="http://localhost/keijiban/table.php"><h2>掲示板一覧・検索</h2></a>
+    <a href="./table.php"><h2>掲示板一覧・検索</h2></a>
 
-    <form method="get" name="search_form" action="http://localhost/keijiban/search.php">
+    <form method="get" name="search_form" action="./search.php">
       <h3>関連検索</h3>
       <input type="text" name="search" value=""><br>
       <input type="submit" value="検索" onclick="return checkForm3();">
@@ -86,7 +86,7 @@ include("dbConnection.php");
           alert("検索ワードを入力して下さい。");
           return false;
         }else{
-          window.location.href("http://localhost/keijiban/search.php")
+          window.location.href("./search.php")
           return true;
         }
       }
@@ -97,7 +97,7 @@ include("dbConnection.php");
       <?php foreach( $message_array as $value ): ?>
       <hr>
       <!-- <?php print_r($value); ?> -->
-				<?php $url = "http://localhost/keijiban/threadtable.php?th_id=".$value["th_id"]; ?>
+				<?php $url = "./threadtable.php?th_id=".$value["th_id"]; ?>
 			<!-- <?php print_r($url);?> -->
       <a href="<?php print_r($url);?>" id="読み込み">
         <article>

@@ -34,7 +34,7 @@ ini_set('display_errors', "On");
 		header('Location: ./error.php');
 	}
 
-	$mysqli2 = new mysqli('localhost', 'root', 'root', 'board');
+	$mysqli2 = new mysqli('127.0.0.1', 'root', 'root', 'board');
 	// 接続エラーの確認
 	if( $mysqli2->connect_errno ) {
 		$error_message[] = 'データの読み込みが失敗しました。 エラー番号 '.$mysqli2->connect_errno.' : '.$mysqli2->connect_error;
@@ -52,11 +52,11 @@ ini_set('display_errors', "On");
 
 	if($th_id>$message_array3[0][ "MAX(th_id)" ]){
 		//die();
-		header('Location: http://localhost/keijiban/error.php');
+		header('Location: http://localhost:8000/error.php');
 	}
 
 	// データベースに接続（読み込み）
-	$mysqli = new mysqli('localhost', 'root', 'root', 'board');
+	$mysqli = new mysqli('127.0.0.1', 'root', 'root', 'board');
 
 	// 接続エラーの確認
 	if( $mysqli->connect_errno ) {
@@ -75,7 +75,7 @@ ini_set('display_errors', "On");
 
 
 	// データベースに接続（読み込み）
-	$sqlmy = new mysqli('localhost', 'root', 'root', 'board');
+	$sqlmy = new mysqli('127.0.0.1', 'root', 'root', 'board');
 
 	// 接続エラーの確認
 	if( $sqlmy->connect_errno ) {
@@ -99,7 +99,7 @@ ini_set('display_errors', "On");
 
 <head>
   <meta charset="utf-8">
-	<link rel="stylesheet" href="http://localhost/keijiban/css/home.css">
+	<link rel="stylesheet" href="./css/home.css">
   <title>掲示板-掲示板内</title>
 </head>
 
@@ -108,10 +108,10 @@ ini_set('display_errors', "On");
     <h1>掲示板</h1>
     <nav>
       <ul>
-				<li><a href="http://localhost/keijiban/home.html" id="ホーム">ホーム</a></li>
-        <li><a href="http://localhost/keijiban/table.php" id="一覧">一覧・検索</a></li>
-        <li><a href="http://localhost/keijiban/creating.php" id="作成">掲示板作成</a></li>
-        <li><a href="http://localhost/keijiban/user_login.html" id="ログインページ">ログイン</a></li>
+				<li><a href="./home.html" id="ホーム">ホーム</a></li>
+        <li><a href="./table.php" id="一覧">一覧・検索</a></li>
+        <li><a href="./creating.php" id="作成">掲示板作成</a></li>
+        <li><a href="./user_login.html" id="ログインページ">ログイン</a></li>
       </ul>
     </nav>
   </head>
@@ -145,7 +145,7 @@ ini_set('display_errors', "On");
 			<?php endforeach; ?>
 		<?php endif; ?>
 
-			<?php $url = "http://localhost/keijiban/thread.php?th_id=".$th_id; ?>
+			<?php $url = "./thread.php?th_id=".$th_id; ?>
 			<a href="<?php print_r($url);?>"><h2>投稿</h2></a>
 		</section>
 

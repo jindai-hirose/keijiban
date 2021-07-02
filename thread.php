@@ -9,7 +9,7 @@
 
 <head>
   <meta charset="utf-8">
-	<link rel="stylesheet" href="http://localhost/keijiban/css/home.css">
+	<link rel="stylesheet" href="./css/home.css">
   <title>掲示板-掲示板投稿</title>
 </head>
 
@@ -18,10 +18,10 @@
     <h1>掲示板</h1>
     <nav>
       <ul>
-				<li><a href="http://localhost/keijiban/home.html" id="ホーム">ホーム</a></li>
-        <li><a href="http://localhost/keijiban/table.php" id="一覧">一覧・検索</a></li>
-        <li><a href="http://localhost/keijiban/creating.php" id="作成">掲示板作成</a></li>
-        <li><a href="http://localhost/keijiban/user_login.html" id="ログインページ">ログイン</a></li>
+				<li><a href="./home.html" id="ホーム">ホーム</a></li>
+        <li><a href="./table.php" id="一覧">一覧・検索</a></li>
+        <li><a href="./creating.php" id="作成">掲示板作成</a></li>
+        <li><a href="./user_login.html" id="ログインページ">ログイン</a></li>
       </ul>
     </nav>
   </head>
@@ -45,7 +45,7 @@
       </ul>
     <?php endif; ?>
 
-		<?php $url = "http://localhost/keijiban/th_writing.php?th_id=".$_GET["th_id"]; ?>
+		<?php $url = "./th_writing.php?th_id=".$_GET["th_id"]; ?>
 		<!-- <?php print_r($url);?> -->
 
 		<form action = "<?php print_r($url);?>" method = "POST" name="submission2">
