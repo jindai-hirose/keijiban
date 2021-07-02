@@ -87,11 +87,13 @@ ini_set('display_errors', "On");
     }
 
 
+
     // データベースの接続を閉じる
     $mysqli->close(); 
 
     //リダイレクト　
-      
+
+
 
     include('./table.php');
     
