@@ -28,22 +28,24 @@
 	$clean = array();
 
   // データベースに接続（読み込み）
-	$mysqli = new mysqli('localhost', 'root', 'root', 'board');
+include("dbConnection.php");
 
-	// 接続エラーの確認
-	if( $mysqli->connect_errno ) {
-		$error_message[] = 'データの読み込みが失敗しました。 エラー番号 '.$mysqli->connect_errno.' : '.$mysqli->connect_error;
-	} else {
-		// データを取得する処理
-		$sql = "SELECT th_id,th_name,th_outline,th_date FROM threads ORDER BY th_date DESC";
-		$res = $mysqli->query($sql);
-		
-		if( $res ) {
-			$message_array = $res->fetch_all(MYSQLI_ASSOC);
-		}
-		
-		$mysqli->close();
-	}
+//	$mysqli = new mysqli('localhost', 'root', 'root', 'board');
+//
+//	// 接続エラーの確認
+//	if( $mysqli->connect_errno ) {
+//		$error_message[] = 'データの読み込みが失敗しました。 エラー番号 '.$mysqli->connect_errno.' : '.$mysqli->connect_error;
+//	} else {
+//		// データを取得する処理
+//		$sql = "SELECT th_id,th_name,th_outline,th_date FROM threads ORDER BY th_date DESC";
+//		$res = $mysqli->query($sql);
+//
+//		if( $res ) {
+//			$message_array = $res->fetch_all(MYSQLI_ASSOC);
+//		}
+//
+//		$mysqli->close();
+//	}
 
 ?>
 
