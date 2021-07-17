@@ -23,8 +23,10 @@ ini_set('display_errors', "On");
   $message_array = array();
   $success_message = null;
   $error_message = array();
-	$clean = array();
-  $thid = null;
+  $clean = array();
+  $view_name = $_POST['view_name'];
+  $message = $_POST['message'];
+  $th_id = $_GET['th_id'];
   
 	//sqlインジェクション対策
 	if($_GET["th_id"] == null){
@@ -42,7 +44,7 @@ ini_set('display_errors', "On");
 	$idcheck = "SELECT MAX(th_id) FROM threads";
 	if($_GET["th_id"]>$idcheck){
 		die();
-		header('Location: http://localhost:8000/error.php');
+		header('Location: http://localhost/keijiban/error.php');
 	}
 
     // データベースに接続（書き込み）
@@ -59,9 +61,6 @@ ini_set('display_errors', "On");
       // 書き込み日時を取得
       $now_date = date("Y/m/d H:i:s");
 
-      $view_name = $_REQUEST['view_name'];
-      $message = $_REQUEST['message'];
-      $th_id = $_GET["th_id"];
       
       // データを登録するSQL作成
       $sql = "INSERT INTO
@@ -91,10 +90,9 @@ ini_set('display_errors', "On");
       $mysqli->close(); 
 
       //リダイレクト　
-      $url = "http://localhost:8000/threadtable.php?th_id=".$_GET["th_id"];
-
-      include("./threadtable.php");
-
-    }
+      $url = "http://localhost/keijiban/threadtable.php?th_id=".$_GET["th_id"];
+      header('Location: ' . $url, true, 301);
+        exit;
+      }
 
 ?>  

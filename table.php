@@ -8,10 +8,10 @@
 //ini_set('display_errors', "On");
 
 	// データベースの接続情報
-	define( 'DB_HOST', 'localhost');
-	define( 'DB_USER', 'root');
-	define( 'DB_PASS', 'root');
-	define( 'DB_NAME', 'board');
+//	define( 'DB_HOST', 'localhost');
+//	define( 'DB_USER', 'root');
+//	define( 'DB_PASS', 'root');
+//	define( 'DB_NAME', 'board');
 
   // タイムゾーン設定
   date_default_timezone_set('Asia/Tokyo');
@@ -103,8 +103,8 @@
         <article>
           <div class="info">
             <h3>題名：<?php echo $value['th_name']; ?></h3>
+            <h4>概要：<?php echo $value['th_outline']; ?></h4>
             <time>作成日：<?php echo date('Y年m月d日 H:i', strtotime($value['th_date'])); ?></time>
-            <p>概要：<?php echo $value['th_outline']; ?></p>
           </div>
         </article>
       </a>

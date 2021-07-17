@@ -6,10 +6,10 @@
 ini_set('display_errors', "On");
 
 // データベースの接続情報
-	define( 'DB_HOST', 'localhost'); 
-	define( 'DB_USER', 'root');
-	define( 'DB_PASS', 'root');
-	define( 'DB_NAME', 'board');
+//	define( 'DB_HOST', 'localhost');
+//	define( 'DB_USER', 'root');
+//	define( 'DB_PASS', 'root');
+//	define( 'DB_NAME', 'board');
 
   // タイムゾーン設定
   date_default_timezone_set('Asia/Tokyo');
@@ -21,11 +21,11 @@ ini_set('display_errors', "On");
   $split_data = null;
   $message = array();
   $message_array = array();
-	$message_array2 = array();
+  $message_array2 = array();
   $success_message = null;
   $error_message = array();
-	$clean = array();
-	$th_id = $_GET["th_id"];
+  $clean = array();
+  $th_id = $_GET["th_id"];
 
 	//urlのth_idに他の数字が入るとエラー出す処理
 	if($th_id == null){
@@ -63,7 +63,7 @@ ini_set('display_errors', "On");
 		$error_message[] = 'データの読み込みが失敗しました。 エラー番号 '.$mysqli->connect_errno.' : '.$mysqli->connect_error;
 	} else {
 		// データを取得する処理
-		$sql = "SELECT view_name, message, post_date FROM messages WHERE th_id = $th_id ORDER BY post_date DESC";
+		$sql = "SELECT view_name, message, post_date FROM messages WHERE th_id = $th_id";
 		$res = $mysqli->query($sql);
 		
 		if( $res ) {
@@ -154,9 +154,9 @@ ini_set('display_errors', "On");
 			<hr>
 			<article>
 				<div class="info">
-					<h3>投稿者：<?= $value['view_name']; ?></h3>
+					<h4>投稿者：<?= $value['view_name']; ?></h4>
+                    <h3>本文：<?= $value['message']; ?></h3>
 					<time>投稿日：<?= date('Y年m月d日 H:i', strtotime($value['post_date'])); ?></time>
-					<p>本文：<?= $value['message']; ?></p>
 				</div>
 			</article>
 			<!-- <?php var_dump($value) ?> -->

@@ -23,8 +23,7 @@ ini_set('display_errors', "On");
   $message_array = array();
   $success_message = null;
   $error_message = array();
-	$clean = array();
-  $th_id = $_GET["th_id"];
+  $clean = array();
   $th_name = $_REQUEST['th_name'];
   $th_outline = $_REQUEST['th_outline'];
 
@@ -92,13 +91,9 @@ ini_set('display_errors', "On");
     $mysqli->close(); 
 
     //リダイレクト　
-
-
-
-
-
-    include('./table.php');
-    
+    $url = 'http://localhost/keijiban/table.php';
+    header('Location: ' . $url, true, 301);
+    exit;
     }
 
 ?>  
