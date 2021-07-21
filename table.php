@@ -5,48 +5,36 @@
 -->
 
 <?php
-//ini_set('display_errors', "On");
-
-	// データベースの接続情報
-//	define( 'DB_HOST', 'localhost');
-//	define( 'DB_USER', 'root');
-//	define( 'DB_PASS', 'root');
-//	define( 'DB_NAME', 'board');
+ini_set('display_errors', "On");
 
   // タイムゾーン設定
   date_default_timezone_set('Asia/Tokyo');
-
-  // 変数の初期化
-  $now_date = null;
-  $data = null;
-  $file_handle = null;
-  $split_data = null;
-  $message = array();
-  $message_array = array();
-  $success_message = null;
-  $error_message = array();
-	$clean = array();
-
-  // データベースに接続（読み込み）
-//include("dbConnection.php");
-
-	$mysqli = new mysqli('127.0.0.1', 'root', 'root', 'board');
-
-	// 接続エラーの確認
-	if( $mysqli->connect_errno ) {
-		$error_message[] = 'データの読み込みが失敗しました。 エラー番号 '.$mysqli->connect_errno.' : '.$mysqli->connect_error;
-	} else {
-		// データを取得する処理
-		$sql = "SELECT th_id,th_name,th_outline,th_date FROM threads ORDER BY th_date DESC";
-		$res = $mysqli->query($sql);
-
-		if( $res ) {
-			$message_array = $res->fetch_all(MYSQLI_ASSOC);
-		}
-
-		$mysqli->close();
-	}
-
+	
+//  if ($_SERVER['REQUEST_METHOD']==='POST') {
+//	  $search = $_POST['search'];
+//  }
+//  var_dump($search);
+  // データベースに接続（書き込み）
+  $dsn = 'mysql:dbname=board;host=localhost;port=3306;charset=utf8';
+  $user = 'root';
+  $password = 'root';
+  $data = [];
+  
+  try {
+      $dbh = new PDO($dsn, $user, $password);
+      $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $sql = "SELECT th_id,th_name,th_outline,th_date FROM threads ORDER BY th_date DESC";
+      $stmt = $dbh->prepare($sql);
+      $stmt->execute();
+      
+      while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+          $data[] = $row;
+      }
+      
+  } catch (PDOException $e) {
+      echo($e->getMessage());
+      die();
+  }
 ?>
 
 <!DOCTYPE html>
@@ -74,27 +62,28 @@
   <main>
     <a href="./table.php"><h2>掲示板一覧・検索</h2></a>
 
-    <form method="get" name="search_form" action="./search.php">
+    <form method="post" name="search_form" action="./search.php">
       <h3>関連検索</h3>
       <input type="text" name="search" value=""><br>
-      <input type="submit" value="検索" onclick="return checkForm3();">
+      <input type="submit" value="検索" onclick="checkForm3();return false;">
     </form>
 
+      <!-- return checkForm3(); -->
     <script>
       function checkForm3(){
         if(document.search_form.search.value == ""){
           alert("検索ワードを入力して下さい。");
-          return false;
-        }else{
-          window.location.href("./search.php")
           return true;
+        }else{
+          window.location("./search.php");
+          return false;
         }
       }
     </script>
 		
     <section>
-      <?php if( !empty($message_array) ): ?>
-      <?php foreach( $message_array as $value ): ?>
+      <?php if( !empty($data) ): ?>
+      <?php foreach( $data as $value ): ?>
       <hr>
       <!-- <?php print_r($value); ?> -->
 				<?php $url = "./threadtable.php?th_id=".$value["th_id"]; ?>

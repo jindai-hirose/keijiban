@@ -24,14 +24,20 @@
     <main>
       <h2>会員ログイン</h2>
       <!-- エラーメッセージ表示 -->
+
+      <h3>新規会員登録はこちら</h3>
+      <a href="./user_add.html" id="新規会員登録"><input type="button" value="新規会員登録"></a>
+      <br>
+      <br>
       <section>
         <form action="./user_login.php" method="post">
+          <h3>会員登録済みの方はこちら</h3>
           <p>メールアドレスを入力：<input type="email" name="user" required></p>
           <p>パスワードを入力：<input type="password" name="password" required></p>
           <p><input type="submit" value="ログイン"></p>
           </form>
       </section>
-      <p>会員登録がまだの方は<a href="./user_add.html" id="新規会員登録">コチラ</a>。</p>
+
     </main>
   </body>
 </html>

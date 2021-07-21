@@ -22,7 +22,7 @@ ini_set('display_errors', "On");
     <h1>掲示板</h1>
     <nav>
       <ul>
-			  <li><a href="./home.html" id="ホーム">ホーム</a></li>
+		<li><a href="./home.html" id="ホーム">ホーム</a></li>
         <li><a href="./table.php" id="一覧">一覧・検索</a></li>
         <li><a href="./creating.php" id="作成">掲示板作成</a></li>
         <li><a href="./user_login.html" id="ログインページ">ログイン</a></li>
@@ -51,14 +51,14 @@ ini_set('display_errors', "On");
     <?php endif; ?>
 
     <form action="./writing.php" method="post" name="submission1">
-			<div>
-				<label for="th_name">題名</label>
-				<input type="text" id="th_name" name="th_name" value="スレッドテスト">
-			</div>
-			<div>
-				<label for="th_outline">概要</label>
-				<input type="text" id="th_outline" name="th_outline" value="概要テスト">
-			</div>
+        <div>
+            <label for="th_name">題名</label>
+            <input type="text" id="th_name" name="th_name" value="スレッドテスト">
+        </div>
+        <div>
+            <label for="th_outline">概要</label>
+            <input type="text" id="th_outline" name="th_outline" value="概要テスト">
+        </div>
       <input type="submit" name="create_submit" value="作成" onclick="return checkForm1();">
     </form>
 
@@ -72,16 +72,12 @@ ini_set('display_errors', "On");
         }
       }
     </script>
-
-		<a href="./table.php"><h2>掲示板一覧・検索</h2></a>
-
+    <a href="./table.php"><h2>掲示板一覧・検索</h2></a>
     <?php if( !empty($message_array) ): ?>
       <?php foreach( $message_array as $value ): ?>
       <hr>
-
           <?php $url = "./threadtable.php?th_id=".$value["th_id"]; ?>
           <?php print_r($url);?>
-
         <a href="<?php print_r($url);?>" id="スレッド">
           <article>
             <div class="info">
